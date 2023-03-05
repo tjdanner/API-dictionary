@@ -1,0 +1,11 @@
+#word-input {
+    width: 250px;
+    height: 2rem;
+}
+
+#word-container {
+    width: 750px;
+    height: 250px;
+    border: 2px solid #4d0080;
+}
+
