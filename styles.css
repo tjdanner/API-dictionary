@@ -1,8 +1,5 @@
 body {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    margin-top: 10%;
+    margin: 10% 0;
     font-family: 'open sans', sans-serif;
 }
 
@@ -14,6 +11,7 @@ body {
     flex-direction: column;
     border-radius: 1rem;
     padding: 2rem;
+    margin: auto;
 }
 
 #search-bar {
@@ -92,3 +90,19 @@ body {
     border-left: 5px solid black;
 }
 
+@media screen and (max-width: 500px) {
+    body {
+        margin: 20% 0;
+    }
+    #container {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+    }
+    #container > * {
+        width: auto;
+    }
+    #word-input {
+        width: 65%;
+    }
+}
