@@ -1,3 +1,4 @@
+// DOM elements.
 const body = document.querySelector('body');
 const wordInput = document.getElementById('word-input');
 const searchButton = document.getElementById('search-button');
@@ -5,16 +6,18 @@ const wordContainer = document.createElement('div');
 const container = document.getElementById('container');
 const soundIcon = document.getElementById('sound-icon');
 
+// Setting URL for API call.
 const URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
+// Audio object for word pronunciations.
 const sound = new Audio();
 
 searchButton.onclick = e => {
 
     wordContainer.setAttribute('id', 'word-container');
     wordContainer.innerHTML = '';
-    console.log(wordInput.value);
 
+    // Fetching the data from the API and updating the word container accordingly.
     fetch(`${URL}${wordInput.value}`)
         .then(res => {
             return res.json();
@@ -23,7 +26,7 @@ searchButton.onclick = e => {
             if (data.title) {
                 wordContainer.innerHTML = `<h1>Could not find word.</h1>`
             } else {
-                console.log(data);
+                // If data exists, sets innerHTML of wordContainer.
                 wordContainer.innerHTML = `
                 <div id='word-icon-container'>
                 <h1 id='word'>${data[0].word}</h1>
@@ -37,16 +40,20 @@ searchButton.onclick = e => {
                 <p>${data[0].meanings[0].definitions[0].definition || ''}</p>
                 <p id='example'>${data[0].meanings[0].definitions[0].example || ''}</p>`
 
+                // Sets sound source to pronunciation audio file.
                 sound.src = data[0].phonetics[0].audio;
             }
         })
         .catch(err => {
+            // Handles errors and updates word container accordingly.
             wordContainer.innerHTML = `<h1>Please enter a word.</h1>`;
         })
-
+    // Appends wordContainer to main container
     container.appendChild(wordContainer);
 }
 
+
+// Event listeners for focus and hover effects on search button and input.
 searchButton.onmouseover = e => {
     searchButton.style.boxShadow = 'black -0.25rem 0.25rem';
     searchButton.onmouseleave = e => {
@@ -75,6 +82,7 @@ wordInput.onfocus = e => {
     }
 }
 
+// Function to play when soundIcon is clicked.
 const playSound = () => {
     sound.play();
 }
